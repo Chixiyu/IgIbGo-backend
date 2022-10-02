@@ -17,8 +17,8 @@
     </repositories>
     <groupId>com.igibgo</groupId>
     <artifactId>IgIbGo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>IgIbGo</name>
+    <version>1.0.1-RELEASE</version>
+    <name>IgIbGo-1.0.1</name>
     <description>IgIbGo</description>
     <properties>
         <java.version>17</java.version>

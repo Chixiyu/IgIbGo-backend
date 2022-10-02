@@ -15,18 +15,19 @@ import javax.annotation.Resource;
 public class BackstageUploadController {
 
     private String videoPosition;
-    private String videoCover;
+    private String videoCoverPosition;
 
     //  Video Section
     @PostMapping("/backstage/videos/upload")
     public void uploadVideo(@RequestParam("video") MultipartFile video) {
         FtpUtil.FtpUpload("/data/video",video);
-
+        videoPosition="http://igibgo.cc:8084/chfs/shared/video/"+video.getOriginalFilename();
     }
 
     @PostMapping("/backstage/videoCovers/upload")
     public void uploadVideoCover(@RequestParam("videoCover") MultipartFile videoCover) {
         FtpUtil.FtpUpload("/data/videoCover",videoCover);
+        videoCoverPosition="http://igibgo.cc:8084/chfs/shared/videoCover/"+videoCover.getOriginalFilename();
     }
 
 
@@ -37,7 +38,7 @@ public class BackstageUploadController {
     @PostMapping("/backstage/videos/videoInfo")
     public boolean videoInfoForm(String videoName, String videoSubtitle, String description) {
         try {
-            uploadService.videoInfoForm(videoName, videoPosition, videoCover, videoSubtitle, description);
+            uploadService.videoInfoForm(videoName, videoPosition, videoCoverPosition, videoSubtitle, description);
             return true;
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -52,6 +53,7 @@ public class BackstageUploadController {
     public void uploadNote(@RequestParam("noteFile") MultipartFile note) {
         FtpUtil.FtpUpload("/data/note",note);
         notePosition="/data/note/"+note.getOriginalFilename();
+        log.debug("note position: "+notePosition);
     }
 
     @PostMapping("/backstage/notes/noteInfo")
