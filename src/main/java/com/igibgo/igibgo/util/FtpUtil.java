@@ -20,7 +20,8 @@ public class FtpUtil {
     public static void FtpUpload(String fileDir, MultipartFile file) {
         try {
             FTPClient ftp = new FTPClient();
-            ftp.connect("igibgo.cc", 21);
+            ftp.connect("172.18.0.2", 21);
+//            ftp.connect("igibgo.cc", 21);
             ftp.login("igibgo", "Hellochixiyu07!");
             System.out.println("reply code: "+ftp.getReplyCode());
             if(!FTPReply.isPositiveCompletion(ftp.getReplyCode())){
