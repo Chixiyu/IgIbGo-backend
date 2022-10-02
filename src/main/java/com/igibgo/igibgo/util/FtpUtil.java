@@ -3,6 +3,7 @@ package com.igibgo.igibgo.util;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedInputStream;
@@ -18,8 +19,12 @@ public class FtpUtil {
     public static void FtpUpload(String fileDir, MultipartFile file) {
         try {
             FTPClient ftp = new FTPClient();
-            ftp.connect("igibgo.cc", 21);
+            ftp.connect("172.18.0.1", 21);
             ftp.login("igibgo", "Hellochixiyu07!");
+            System.out.println("reply code: "+ftp.getReplyCode());
+            if(!FTPReply.isPositiveCompletion(ftp.getReplyCode())){
+                log.error("FTP login failed");
+            }
             ftp.changeWorkingDirectory(fileDir);
             InputStream inputStream = new BufferedInputStream(file.getInputStream());
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
