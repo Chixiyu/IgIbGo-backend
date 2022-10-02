@@ -52,7 +52,7 @@ public class BackstageUploadController {
     @PostMapping("/backstage/notes/upload")
     public void uploadNote(@RequestParam("noteFile") MultipartFile note) {
         FtpUtil.FtpUpload("/data/note",note);
-        notePosition="/data/note/"+note.getOriginalFilename();
+        notePosition="http://igibgo.cc:8084/chfs/shared/note/"+note.getOriginalFilename();
         log.debug("note position: "+notePosition);
     }
 
